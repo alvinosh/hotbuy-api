@@ -1,0 +1,27 @@
+{
+	"name": "hotbuy",
+	"version": "1.0.0",
+	"description": "The backend API for hotbuy",
+	"main": "app.js",
+	"scripts": {
+		"start": "node app.js",
+		"dev": "nodemon app.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/alvinosh/hotbuy-api.git"
+	},
+	"keywords": [
+		"API",
+		"hotbuy"
+	],
+	"author": "Alvi Hysa",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/alvinosh/hotbuy-api/issues"
+	},
+	"homepage": "https://github.com/alvinosh/hotbuy-api#readme",
+	"devDependencies": {
+		"nodemon": "^2.0.6"
+	}
+}
