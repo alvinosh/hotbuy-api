@@ -1,7 +1,6 @@
 const express = require("express");
 const sequelize = require("./db/sequelize");
 require("dotenv").config({ path: "./config/.env" });
-const app = express();
 
 async function assertDatabaseConnection() {
   console.log(`Checking database connection...`);
@@ -18,12 +17,14 @@ async function assertDatabaseConnection() {
 async function initServer() {
   await assertDatabaseConnection();
 
+  const app = express();
   const PORT = process.env.PORT;
 
   console.log(`Starting server on port ${PORT}`);
 
-  app.get("/", (req, res) => {
-    res.send("<h1>Im hot</h1>");
+  app.get("/api/posts", (req, res) => {
+    const users = sequelize.models.Post.findAll();
+    res.status(200).json(users);
   });
 
   app.listen(PORT);
