@@ -1,35 +1,35 @@
 {
-	"name": "hotbuy",
-	"version": "1.0.0",
-	"description": "The backend API for hotbuy",
-	"main": "app.js",
-	"scripts": {
-		"start": "node app.js",
-		"dev": "nodemon app.js"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/alvinosh/hotbuy-api.git"
-	},
-	"keywords": [
-		"API",
-		"hotbuy"
-	],
-	"author": "Alvi Hysa",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/alvinosh/hotbuy-api/issues"
-	},
-	"homepage": "https://github.com/alvinosh/hotbuy-api#readme",
-	"devDependencies": {
-		"nodemon": "^2.0.6"
-	},
-	"dependencies": {
-		"body-parser": "^1.19.0",
-		"dotenv": "^8.2.0",
-		"express": "^4.17.1",
-		"pg": "^8.5.1",
-		"pg-hstore": "^2.3.3",
-		"sequelize": "^6.3.5"
-	}
+  "name": "hotbuy",
+  "version": "1.0.0",
+  "description": "The backend API for hotbuy",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alvinosh/hotbuy-api.git"
+  },
+  "keywords": [
+    "API",
+    "hotbuy"
+  ],
+  "author": "Alvi Hysa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alvinosh/hotbuy-api/issues"
+  },
+  "homepage": "https://github.com/alvinosh/hotbuy-api#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "pg": "^8.5.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.3.5"
+  }
 }

@@ -1,5 +1,5 @@
-const app = require("./server/server");
-const sequelize = require("./db/sequelize");
+const app = require("./api/server/server");
+const sequelize = require("./api/db/sequelize");
 require("dotenv").config({ path: "./config/.env" });
 
 async function assertDatabaseConnection() {
@@ -10,7 +10,7 @@ async function assertDatabaseConnection() {
   } catch (error) {
     console.log("Unable to connect to the database:");
     console.log(error.message);
-    process.exit(1);
+    process.exit(2);
   }
 }
 

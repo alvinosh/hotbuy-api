@@ -1,6 +1,9 @@
 const { Sequelize } = require("sequelize");
+const path = require("path");
 
-require("dotenv").config({ path: "./config/.env" });
+require("dotenv").config({
+  path: path.resolve(__dirname, "../../config/.env")
+});
 
 const db_name = process.env.DB_NAME;
 const db_user = process.env.DB_USER;
@@ -17,7 +20,7 @@ for (const model of models) {
   model(sequelize);
 }
 
-sequelize.sync({ alter: true }).then(() => {
+sequelize.sync({ force: true }).then(() => {
   console.log(`Database & tables created!`);
 });
 
