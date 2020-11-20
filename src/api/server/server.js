@@ -2,7 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 
 const routes = {
-  posts: require("./routes/posts")
+  posts: require("./routes/posts"),
+  users: require("./routes/users")
 };
 
 const app = express();
