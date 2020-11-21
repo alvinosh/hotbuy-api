@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API Documentation</title>
+
+    <style>
+      body {
+        padding: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Hotbuy documentation</h1>
+    <hr />
+    <h2>Users</h2>
+    <h4>Fields</h4>
+    <ul>
+      <li><b>id</b> "not given in create"</li>
+      <li><b>username</b></li>
+      <li><b>password</b></li>
+      <li><b>first_name</b></li>
+      <li><b>last_name</b></li>
+      <li><b>phone</b></li>
+      <li>
+        External :
+        <ul>
+          <li>Posts</li>
+        </ul>
+      </li>
+    </ul>
+    <h4>Commands</h4>
+    <ul>
+      <li><b>GET ALL </b> GET /api/users</li>
+      <li><b>GET BY ID </b> GET /api/users/id</li>
+      <li><b>CREATE </b> POST /api/users</li>
+      <li><b>REMOVE </b> DELETE /api/users/id</li>
+    </ul>
+    <hr />
+    <h2>Posts</h2>
+    <h4>Fields</h4>
+    <ul>
+      <li><b>id</b> "not given in create"</li>
+      <li><b>title</b></li>
+      <li><b>description</b></li>
+      <li><b>price</b></li>
+      <li><b>pictures</b></li>
+      <li><b>userId</b></li>
+    </ul>
+    <h4>Commands</h4>
+    <ul>
+      <li><b>GET ALL </b> GET /api/posts</li>
+      <li><b>GET BY ID </b> GET /api/posts/id</li>
+      <li><b>CREATE </b> POST /api/posts</li>
+      <li><b>REMOVE </b> DELETE /api/posts/id</li>
+    </ul>
+  </body>
+</html>

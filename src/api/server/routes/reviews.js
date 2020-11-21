@@ -1,22 +1,18 @@
 const { getIdParam } = require("../helpers");
 const sequelize = require("../../db/sequelize");
 
-const { Post, Comment } = sequelize.models;
+const { Review } = sequelize.models;
 
 async function getAll(req, res) {
-  const posts = await Post.findAll({
-    include: Comment
-  });
-  res.status(200).json(posts);
+  const reviews = await Review.findAll();
+  res.status(200).json(reviews);
 }
 
 async function getById(req, res) {
   const id = getIdParam(req);
-  const post = await Post.findByPk(id, {
-    include: Comment
-  });
-  if (post) {
-    res.status(200).json(post);
+  const review = await Review.findByPk(id);
+  if (review) {
+    res.status(200).json(review);
   } else {
     res.status(404).send("404 - Not found");
   }
@@ -31,14 +27,14 @@ async function create(req, res) {
       );
   } else {
     console.log(req.body);
-    await Post.create(req.body);
+    await Review.create(req.body);
     res.status(201).end();
   }
 }
 
 async function remove(req, res) {
   const id = getIdParam(req);
-  await Post.destroy({
+  await Review.destroy({
     where: {
       id: id
     }

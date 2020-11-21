@@ -1,6 +1,4 @@
-const { DataTypes } = require("sequelize");
-
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   sequelize.define("User", {
     id: {
       allowNull: false,
@@ -15,19 +13,23 @@ module.exports = (sequelize) => {
     },
     password: {
       allowNull: false,
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      defaultValue: "123456789"
     },
     first_name: {
       allowNull: false,
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      defaultValue: "alvi"
     },
     last_name: {
       allowNull: false,
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      defaultValue: "hysa"
     },
     phone: {
       allowNull: false,
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      defaultValue: "1234567"
     }
   });
 };

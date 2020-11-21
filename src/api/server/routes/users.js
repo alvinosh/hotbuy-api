@@ -1,10 +1,16 @@
 const { getIdParam } = require("../helpers");
 const sequelize = require("../../db/sequelize");
-const { User, Post } = sequelize.models;
+const { User, Post, Review } = sequelize.models;
 
 async function getAll(req, res) {
   const users = await User.findAll({
-    include: Post
+    include: [
+      Post,
+      {
+        model: Review,
+        foreignKey: "recieverId"
+      }
+    ]
   });
   res.status(200).json(users);
 }
@@ -12,7 +18,7 @@ async function getAll(req, res) {
 async function getById(req, res) {
   const id = getIdParam(req);
   const user = await User.findByPk(id, {
-    include: Post
+    include: [Post, Review]
   });
   if (user) {
     res.status(200).json(user);

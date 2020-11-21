@@ -1,6 +1,4 @@
-const { DataTypes } = require("sequelize");
-
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   sequelize.define("Post", {
     id: {
       allowNull: false,
@@ -10,23 +8,23 @@ module.exports = (sequelize) => {
     },
     title: {
       allowNull: false,
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      defaultValue: "titull"
     },
     description: {
       allowNull: false,
-      type: DataTypes.TEXT
+      type: DataTypes.TEXT,
+      defaultValue: "permbajtja"
     },
     price: {
       allowNull: false,
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      defaultValue: 1000
     },
     pictures: {
       allowNull: false,
-      type: DataTypes.STRING
-    },
-    userId: {
-      allowNull: false,
-      type: DataTypes.INTEGER
+      type: DataTypes.STRING,
+      defaultValue: "kot"
     }
   });
 };

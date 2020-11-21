@@ -1,13 +1,22 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const path = require("path");
+const appDir = path.dirname(require.main.filename);
+const { getRoutes } = require("./helpers");
 
-const routes = {
-  posts: require("./routes/posts"),
-  users: require("./routes/users")
-};
-
+const routes = getRoutes();
 const app = express();
 
+//Allow CORS from svelte localhost
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "http://127.0.0.1:5000"); // update to match the domain you will make the request from
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+//Use bodyparser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -24,13 +33,12 @@ function makeHandlerAwareOfAsyncErrors(handler) {
 
 // We provide a root route just as an example
 app.get("/", (req, res) => {
-  res.send(`
-		<h2>Hello, Sequelize + Express!</h2>
-	`);
+  res.sendFile(path.join(appDir, "public/index.html"));
 });
 
 // We define the standard REST APIs for each route (if they exist).
 for (const [routeName, routeController] of Object.entries(routes)) {
+  console.log(routeName);
   if (routeController.getAll) {
     app.get(
       `/api/${routeName}`,
