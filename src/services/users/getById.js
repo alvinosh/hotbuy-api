@@ -11,6 +11,6 @@ module.exports = async (data, db) => {
       ]
     });
   } catch (error) {
-    return error;
+    throw error;
   }
 };

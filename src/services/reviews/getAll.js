@@ -4,6 +4,6 @@ module.exports = async (data, db) => {
   try {
     return await Review.findAll();
   } catch (error) {
-    return error;
+    throw error;
   }
 };

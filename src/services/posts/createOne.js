@@ -4,6 +4,6 @@ module.exports = async (data, db) => {
   try {
     return await Post.create(data);
   } catch (error) {
-    return error;
+    throw error;
   }
 };

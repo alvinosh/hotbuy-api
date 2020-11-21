@@ -1,21 +1,24 @@
 const bcrypt = require("bcryptjs");
+const createError = require("http-errors");
 
 module.exports = async (data, db) => {
   const { User } = db.models;
 
   try {
-    const emailExist = await User.findOne({ email: data.email });
-    const usernameExist = await User.findOne({ username: data.username });
+    const emailExist = await User.findOne({ where: { email: data.email } });
+    const usernameExist = await User.findOne({
+      where: { username: data.username }
+    });
 
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(data.password, salt);
 
-    if (emailExist) {
-      throw new Error("Email is in use");
+    if (usernameExist) {
+      throw new createError(400, "Username is in use");
     }
 
-    if (usernameExist) {
-      throw new Error("Username is in use");
+    if (emailExist) {
+      throw new createError(400, "Email is in use");
     }
 
     return await User.create({

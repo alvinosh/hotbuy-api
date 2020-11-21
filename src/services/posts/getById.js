@@ -5,6 +5,6 @@ module.exports = async (data, db) => {
       include: Comment
     });
   } catch (error) {
-    return error;
+    throw error;
   }
 };

@@ -8,13 +8,17 @@ module.exports = (app, db) => {
   app.use("/users", route);
 
   route.get("", async (req, res) => {
-    let data;
+    try {
+      let data;
 
-    if (Object.keys(req.query).length === 0) {
-      data = await UserController.getAll(req.body, db);
+      if (Object.keys(req.query).length === 0) {
+        data = await UserController.getAll(req.body, db);
+      }
+      if (req.query.id) data = await UserController.getById(req.query, db);
+      res.status(200).send(data);
+    } catch (e) {
+      next(e);
     }
-    if (req.query.id) data = await UserController.getById(req.query, db);
-    res.status(200).send(data);
   });
 
   route.post("/signup", celebrate(register), async (req, res, next) => {

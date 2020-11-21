@@ -3,6 +3,6 @@ module.exports = async (data, db) => {
   try {
     return await Comment.findByPk(data.id);
   } catch (error) {
-    return error;
+    throw error;
   }
 };

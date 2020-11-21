@@ -18,4 +18,15 @@ module.exports = (app, db) => {
   });
 
   app.use("/api", routes(db));
+
+  app.use((error, req, res, next) => {
+    res.status(error.status);
+
+    // Sends response
+    res.json({
+      status: error.status,
+      message: error.message,
+      stack: error.stack
+    });
+  });
 };

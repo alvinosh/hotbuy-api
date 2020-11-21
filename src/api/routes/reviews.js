@@ -6,16 +6,24 @@ module.exports = (app, db) => {
   app.use("/reviews", route);
 
   route.get("", async (req, res) => {
-    let data;
+    try {
+      let data;
 
-    if (Object.keys(req.query).length === 0) {
-      data = await ReviewController.getAll(req.body, db);
+      if (Object.keys(req.query).length === 0) {
+        data = await ReviewController.getAll(req.body, db);
+      }
+      if (req.query.id) data = await ReviewController.getById(req.query, db);
+      res.status(200).send(data);
+    } catch (e) {
+      next(e);
     }
-    if (req.query.id) data = await ReviewController.getById(req.query, db);
-    res.status(200).send(data);
   });
 
   route.post("", async (req, res) => {
-    res.status(201).send(await ReviewController.createOne(req.body, db));
+    try {
+      res.status(201).send(await ReviewController.createOne(req.body, db));
+    } catch (e) {
+      next(e);
+    }
   });
 };
