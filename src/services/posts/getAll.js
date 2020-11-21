@@ -1,8 +1,10 @@
 module.exports = async (data, db) => {
-  const { Post } = db.models;
+  const { Post, Comment } = db.models;
 
   try {
-    return await Post.findAll();
+    return await Post.findAll({
+      include: Comment
+    });
   } catch (error) {
     return error;
   }
