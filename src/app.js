@@ -1,28 +1,20 @@
-const app = require("./api/server/server");
-const sequelize = require("./api/db/sequelize");
-require("dotenv").config({ path: "./config/.env" });
-
-async function assertDatabaseConnection() {
-  console.log(`Checking database connection...`);
-  try {
-    await sequelize.authenticate();
-    console.log("Database connection OK!");
-  } catch (error) {
-    console.log("Unable to connect to the database:");
-    console.log(error.message);
-    process.exit(2);
-  }
-}
+const express = require("express");
+const path = require("path");
+const appDir = path.dirname(require.main.filename);
+require("dotenv").config({
+  path: path.join(appDir, "/config/.env")
+});
 
 async function initServer() {
-  await assertDatabaseConnection();
-
   const PORT = process.env.PORT;
 
+  const app = express();
+
+  const expressApp = require("./loaders");
+  expressApp(app);
+
   app.listen(PORT, () => {
-    console.log(
-      `Express server started on port ${PORT}. Try some routes, such as '/api/users'.`
-    );
+    console.log(`Express server started on port ${PORT}`);
   });
 }
 
