@@ -1,5 +1,4 @@
 const { Router } = require("express");
-const { noExtendLeft } = require("sequelize/types/lib/operators");
 const route = Router();
 const CommentController = require("../../services/index")("comments");
 
