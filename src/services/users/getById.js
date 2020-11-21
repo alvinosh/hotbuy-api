@@ -1,8 +1,7 @@
 module.exports = async (data, db) => {
   const { User, Post, Review } = db.models;
-
   try {
-    return await User.findAll({
+    return await User.findByPk(data.id, {
       include: [
         Post,
         {
