@@ -16,12 +16,6 @@ module.exports = (app, db) => {
   });
 
   route.post("", async (req, res) => {
-    if (req.body.id)
-      res.status(401).send(
-        `Bad Request : 
-				ID should not be provided as it is configured automatically`
-      );
-
     res.status(201).send(await PostController.createOne(req.body, db));
   });
 };

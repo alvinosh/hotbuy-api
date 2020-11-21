@@ -34,7 +34,7 @@ for (const model of models) {
 applyRelations(sequelize);
 
 //Sync DBs
-sequelize.sync({ alter: true }).then(() => {
+sequelize.sync({ force: true }).then(() => {
   console.log(`Database & tables created!`);
 });
 

@@ -1,6 +1,8 @@
 const { Router } = require("express");
 const route = Router();
 const UserController = require("../../services/index")("users");
+const { register } = require("../validation");
+const { celebrate, Joi } = require("celebrate");
 
 module.exports = (app, db) => {
   app.use("/users", route);
@@ -15,13 +17,12 @@ module.exports = (app, db) => {
     res.status(200).send(data);
   });
 
-  route.post("", async (req, res) => {
-    if (req.body.id)
-      res.status(401).send(
-        `Bad Request : 
-				ID should not be provided as it is configured automatically`
-      );
-
-    res.status(201).send(await UserController.createOne(req.body, db));
+  route.post("/signup", celebrate(register), async (req, res, next) => {
+    try {
+      let user = await UserController.register(req.body, db);
+      res.status(201).send(user);
+    } catch (e) {
+      next(e);
+    }
   });
 };
