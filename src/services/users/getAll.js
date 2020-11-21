@@ -1,16 +1,8 @@
 module.exports = async (data, db) => {
-  const { User, Post, Review, Comment } = db.models;
+  const { User } = db.models;
 
   try {
-    return await User.findAll({
-      include: [
-        Post,
-        {
-          model: Review,
-          foreignKey: "recieverId"
-        }
-      ]
-    });
+    return await User.findAll();
   } catch (error) {
     throw error;
   }

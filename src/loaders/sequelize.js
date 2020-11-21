@@ -6,9 +6,7 @@ const path = require("path");
 //Get App Directory
 const appDir = path.dirname(require.main.filename);
 //Get ENV Variables
-require("dotenv").config({
-  path: path.join(appDir, "/config/.env")
-});
+
 const db_name = process.env.DB_NAME;
 const db_user = process.env.DB_USER;
 const db_pwd = process.env.DB_PWD;
@@ -34,7 +32,7 @@ for (const model of models) {
 applyRelations(sequelize);
 
 //Sync DBs
-sequelize.sync({ force: true }).then(() => {
+sequelize.sync({ alter: true }).then(() => {
   console.log(`Database & tables created!`);
 });
 

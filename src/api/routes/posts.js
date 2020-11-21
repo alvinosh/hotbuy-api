@@ -5,7 +5,7 @@ const PostController = require("../../services/index")("posts");
 module.exports = (app, db) => {
   app.use("/posts", route);
 
-  route.get("", async (req, res) => {
+  route.get("", async (req, res, next) => {
     try {
       let data;
 
@@ -19,7 +19,7 @@ module.exports = (app, db) => {
     }
   });
 
-  route.post("", async (req, res) => {
+  route.post("", async (req, res, next) => {
     try {
       res.status(201).send(await PostController.createOne(req.body, db));
     } catch (e) {

@@ -10,3 +10,10 @@ module.exports.register = {
     phone: Joi.number().integer()
   })
 };
+
+module.exports.login = {
+  [Segments.BODY]: Joi.object().keys({
+    password: Joi.string().required().min(6).label("Password"),
+    email: Joi.string().min(6).required().email().label("Email")
+  })
+};

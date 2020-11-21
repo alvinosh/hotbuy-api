@@ -5,7 +5,7 @@ const CommentController = require("../../services/index")("comments");
 module.exports = (app, db) => {
   app.use("/comments", route);
 
-  route.get("", async (req, res) => {
+  route.get("", async (req, res, next) => {
     try {
       let data;
       if (Object.keys(req.query).length === 0) {
@@ -18,7 +18,7 @@ module.exports = (app, db) => {
     }
   });
 
-  route.post("", async (req, res) => {
+  route.post("", async (req, res, next) => {
     try {
       res.status(201).send(await CommentController.createOne(req.body, db));
     } catch (e) {

@@ -5,7 +5,7 @@ const path = require("path");
 const appDir = path.dirname(require.main.filename);
 
 module.exports = (type) => {
-  let routes = {};
+  let services = {};
   let files = fs.readdirSync(path.join(appDir, "services", type));
 
   let jsfile = files.filter((f) => f.split(".").pop() === "js");
@@ -15,9 +15,9 @@ module.exports = (type) => {
 
   jsfile.forEach((file, i) => {
     let name = file.split(".")[0];
-    routes[name] = require(`./${type}/${name}`);
+    services[name] = require(`./${type}/${name}`);
     console.log(`Service : ${file} : ${type} loaded`);
   });
 
-  return routes;
+  return services;
 };
