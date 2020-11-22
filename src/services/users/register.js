@@ -1,6 +1,11 @@
 const bcrypt = require("bcryptjs");
 const createError = require("http-errors");
 
+/**
+ * Registers new user
+ * @param {all user data} data
+ * @param {*} db
+ */
 module.exports = async (data, db) => {
   const { User } = db.models;
 

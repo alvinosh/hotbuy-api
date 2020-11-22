@@ -1,4 +1,7 @@
 const { celebrate, Joi, errors, Segments } = require("celebrate");
+/**
+ * register validator
+ */
 module.exports.register = {
   [Segments.BODY]: Joi.object().keys({
     first_name: Joi.string().required().label("First Name"),
@@ -11,6 +14,9 @@ module.exports.register = {
   })
 };
 
+/**
+ * login validator
+ */
 module.exports.login = {
   [Segments.BODY]: Joi.object().keys({
     password: Joi.string().required().min(6).label("Password"),

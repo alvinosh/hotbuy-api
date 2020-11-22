@@ -8,7 +8,9 @@ const auth = require("../middleware/auth");
 
 module.exports = (app, db) => {
   app.use("/users", route);
-
+  /**
+   * Get all users or get single user by id if query speficied
+   */
   route.get("", async (req, res, next) => {
     try {
       let data;
@@ -23,6 +25,9 @@ module.exports = (app, db) => {
     }
   });
 
+  /**
+   * Get current logged in user
+   */
   route.get("/me", auth, async (req, res, next) => {
     try {
       data = await UserController.getById(req.body, db);
@@ -32,6 +37,9 @@ module.exports = (app, db) => {
     }
   });
 
+  /**
+   * Post new user and get back created user
+   */
   route.post("/signup", celebrate(register), async (req, res, next) => {
     try {
       let user = await UserController.register(req.body, db);
@@ -41,6 +49,7 @@ module.exports = (app, db) => {
     }
   });
 
+  /** Post existing user email and password and returns token with user id inside */
   route.post("/login", celebrate(login), async (req, res, next) => {
     try {
       let userId = await UserController.login(req.body, db);
@@ -51,6 +60,9 @@ module.exports = (app, db) => {
     }
   });
 
+  /**
+   * Delete current user with authenticated id
+   */
   route.delete("", auth, async (req, res, next) => {
     try {
       await UserController.deleteOne(req.body, db);

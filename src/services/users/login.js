@@ -1,6 +1,11 @@
 const bcrypt = require("bcryptjs");
 const createError = require("http-errors");
 
+/**
+ * Checks if user enters right values and returns token
+ * @param {email and password} data
+ * @param {*} db
+ */
 module.exports = async (data, db) => {
   const { User } = db.models;
 

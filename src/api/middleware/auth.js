@@ -1,5 +1,10 @@
 const jwt = require("jsonwebtoken");
-
+/**
+ * Read token from header and write it to request if valid
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ */
 module.exports = (req, res, next) => {
   const token = req.header("token");
 
