@@ -2,8 +2,9 @@ const { Router } = require("express");
 const route = Router();
 const UserController = require("../../services/index")("users");
 const { register, login } = require("../validation");
-const { celebrate, Joi } = require("celebrate");
+const { celebrate, Joi, isCelebrateError } = require("celebrate");
 const jwt = require("jsonwebtoken");
+const auth = require("../middleware/auth");
 
 module.exports = (app, db) => {
   app.use("/users", route);
@@ -16,7 +17,16 @@ module.exports = (app, db) => {
         data = await UserController.getAll(req.body, db);
       }
       if (req.query.id) data = await UserController.getById(req.query, db);
-      res.status(200).send(data);
+      return res.status(200).send(data);
+    } catch (e) {
+      next(e);
+    }
+  });
+
+  route.get("/me", auth, async (req, res, next) => {
+    try {
+      data = await UserController.getById(req.body, db);
+      return res.status(200).send(data);
     } catch (e) {
       next(e);
     }
@@ -25,7 +35,7 @@ module.exports = (app, db) => {
   route.post("/signup", celebrate(register), async (req, res, next) => {
     try {
       let user = await UserController.register(req.body, db);
-      res.status(201).send(user);
+      return res.status(201).send(user);
     } catch (e) {
       next(e);
     }
@@ -33,9 +43,18 @@ module.exports = (app, db) => {
 
   route.post("/login", celebrate(login), async (req, res, next) => {
     try {
-      let userId = UserController.login(req.body, db);
-      let token = jwt.sign({ id, userId }, process.env.JWT_TOKEN);
-      res.header("token", token).send(token);
+      let userId = await UserController.login(req.body, db);
+      let token = jwt.sign({ id: userId }, process.env.JWT_TOKEN);
+      return res.header("token", token).send(token);
+    } catch (e) {
+      next(e);
+    }
+  });
+
+  route.delete("", auth, async (req, res, next) => {
+    try {
+      await UserController.deleteOne(req.body, db);
+      return res.status(201).send("User deleted");
     } catch (e) {
       next(e);
     }

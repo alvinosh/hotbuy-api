@@ -11,12 +11,15 @@ module.exports = async (data, db) => {
       throw new createError(400, "Email not found");
     }
 
-    const validPass = await bcrypt.compare(data.password, user.password);
+    const validPass = await bcrypt.compare(
+      data.password,
+      user.dataValues.password
+    );
 
     if (!validPass) {
       throw new createError(400, "Invalid password");
     } else {
-      return user.id;
+      return user.dataValues.id;
     }
   } catch (error) {
     throw error;
