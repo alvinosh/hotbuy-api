@@ -1,3 +1,8 @@
+/**
+ * Gets a user by id
+ * @param {user id needed} data
+ * @param {*} db
+ */
 module.exports = async (data, db) => {
   const { User, Post, Review, Comment } = db.models;
   try {

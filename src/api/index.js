@@ -1,6 +1,9 @@
 const Router = require("express");
 const { getRoutes } = require("./helpers");
-// guaranteed to get dependencies
+/**
+ * loads all routs
+ * @param {database} db
+ */
 module.exports = (db) => {
   const app = Router();
 

@@ -2,6 +2,9 @@ const fs = require("fs");
 const path = require("path");
 const appDir = path.dirname(require.main.filename);
 
+/**
+ * Gets all routes from /routes folder
+ */
 function getRoutes() {
   let routes = [];
   let files = fs.readdirSync(path.join(appDir, "api/routes"));

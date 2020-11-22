@@ -1,3 +1,8 @@
+/**
+ * Gets all users
+ * @param {no data needed} data
+ * @param {*} db
+ */
 module.exports = async (data, db) => {
   const { User } = db.models;
 

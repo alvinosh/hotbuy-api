@@ -1,3 +1,8 @@
+/**
+ * Deletes a user
+ * @param {only user id needed} data
+ * @param {*} db
+ */
 module.exports = async (data, db) => {
   const { User } = db.models;
   try {

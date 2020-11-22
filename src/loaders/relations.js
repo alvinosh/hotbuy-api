@@ -1,3 +1,7 @@
+/**
+ * Applying relations to the database
+ * @param {db} sequelize
+ */
 function applyRelations(sequelize) {
   const { User, Post, Review, Comment } = sequelize.models;
   //Relations
