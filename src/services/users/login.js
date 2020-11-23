@@ -24,7 +24,7 @@ module.exports = async (data, db) => {
     if (!validPass) {
       throw new createError(400, "Invalid password");
     } else {
-      return user.dataValues.id;
+      return user.dataValues;
     }
   } catch (error) {
     throw error;

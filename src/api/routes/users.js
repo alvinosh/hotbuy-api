@@ -43,7 +43,11 @@ module.exports = (app, db) => {
   route.post("/signup", celebrate(register), async (req, res, next) => {
     try {
       let user = await UserController.register(req.body, db);
-      return res.status(201).send(user);
+
+      let token = jwt.sign({ id: user.id }, process.env.JWT_TOKEN);
+      return res
+        .header("token", token)
+        .send(JSON.stringify({ token: token, user: user }));
     } catch (e) {
       next(e);
     }
@@ -52,9 +56,11 @@ module.exports = (app, db) => {
   /** Post existing user email and password and returns token with user id inside */
   route.post("/login", celebrate(login), async (req, res, next) => {
     try {
-      let userId = await UserController.login(req.body, db);
-      let token = jwt.sign({ id: userId }, process.env.JWT_TOKEN);
-      return res.header("token", token).send(token);
+      let user = await UserController.login(req.body, db);
+      let token = jwt.sign({ id: user.id }, process.env.JWT_TOKEN);
+      return res
+        .header("token", token)
+        .send(JSON.stringify({ token: token, user: user }));
     } catch (e) {
       next(e);
     }
