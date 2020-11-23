@@ -1,12 +1,9 @@
-/**
- * Gets a user by id
- * @param {user id needed} data
- * @param {*} db
- */
+const createError = require("http-errors");
+
 module.exports = async (data, db) => {
-  const { User, Post, Review, Comment } = db.models;
+  const { User, Post, Review } = db.models;
   try {
-    return await User.findByPk(data.id, {
+    let user = User.findByPk(data.id, {
       include: [
         Post,
         {
@@ -15,6 +12,12 @@ module.exports = async (data, db) => {
         }
       ]
     });
+
+    if (!user) {
+      throw new createError(404, "User not found");
+    }
+
+    return user;
   } catch (error) {
     throw error;
   }

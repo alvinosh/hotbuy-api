@@ -1,10 +1,10 @@
 module.exports = async (data, db) => {
   const { Review } = db.models;
+
   try {
-    return await Review.destroy({
+    return await Review.findAll({
       where: {
-        senderId: data.token.id,
-        id: data.id
+        recieverId: data.id
       }
     });
   } catch (error) {

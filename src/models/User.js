@@ -18,23 +18,19 @@ module.exports = (sequelize, DataTypes) => {
     },
     password: {
       allowNull: false,
-      type: DataTypes.STRING,
-      defaultValue: "123456789"
+      type: DataTypes.STRING
     },
     first_name: {
       allowNull: false,
-      type: DataTypes.STRING,
-      defaultValue: "alvi"
+      type: DataTypes.STRING
     },
     last_name: {
       allowNull: false,
-      type: DataTypes.STRING,
-      defaultValue: "hysa"
+      type: DataTypes.STRING
     },
     phone: {
       allowNull: false,
-      type: DataTypes.STRING,
-      defaultValue: "1234567"
+      type: DataTypes.STRING
     }
   });
 };

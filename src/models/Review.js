@@ -8,8 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     comment: {
       allowNull: false,
-      type: DataTypes.STRING,
-      defaultValue: "sa kot"
+      type: DataTypes.STRING
     },
     score: {
       allowNull: false,

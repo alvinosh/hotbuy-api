@@ -4,10 +4,12 @@
  * @param {*} db
  */
 module.exports = async (data, db) => {
-  const { User } = db.models;
+  const { User, Review } = db.models;
 
   try {
-    return await User.findAll();
+    return await User.findAll({
+      include: Review
+    });
   } catch (error) {
     throw error;
   }

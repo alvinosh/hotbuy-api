@@ -2,7 +2,7 @@ const { Router } = require("express");
 const route = Router();
 const UserController = require("../../services/index")("users");
 const { register, login } = require("../validation");
-const { celebrate, Joi, isCelebrateError } = require("celebrate");
+const { celebrate } = require("celebrate");
 const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
 

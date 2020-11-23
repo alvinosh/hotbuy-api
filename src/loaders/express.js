@@ -4,7 +4,7 @@ const appDir = path.dirname(require.main.filename);
 const routes = require("../api");
 var cors = require("cors");
 const createError = require("http-errors");
-const { celebrate, Joi, errors, Segments } = require("celebrate");
+const { errors } = require("celebrate");
 
 /**
  *
