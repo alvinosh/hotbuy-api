@@ -10,11 +10,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.STRING,
       defaultValue: "ky esht nje komment"
-    },
-    score: {
-      allowNull: false,
-      type: DataTypes.INTEGER,
-      defaultValue: 0
     }
   });
 };
