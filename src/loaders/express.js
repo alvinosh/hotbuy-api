@@ -37,7 +37,7 @@ module.exports = (app, db) => {
       // Sends response
       res.json({
         status: error.status,
-        message: error.message,
+        error: error.message,
         stack: error.stack
       });
     } else {
