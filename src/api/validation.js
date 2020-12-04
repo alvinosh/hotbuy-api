@@ -3,6 +3,7 @@ const { Joi, Segments } = require("celebrate");
  * register validator
  */
 module.exports.register = {
+  // TODO : FIX ERRORS MESSAGES
   [Segments.BODY]: Joi.object().keys({
     first_name: Joi.string().required().label("First Name"),
     last_name: Joi.string().required().label("Last Name"),
@@ -10,7 +11,7 @@ module.exports.register = {
     repeat_password: Joi.ref("password"),
     email: Joi.string().min(6).required().email().label("Email"),
     username: Joi.string().alphanum().min(3).max(30).required(),
-    phone: Joi.number().integer().required()
+    phone: Joi.number().integer().required().message("Phone number is required")
   })
 };
 

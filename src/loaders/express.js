@@ -4,7 +4,7 @@ const appDir = path.dirname(require.main.filename);
 const routes = require("../api");
 var cors = require("cors");
 const createError = require("http-errors");
-const { errors } = require("celebrate");
+const { errors, isCelebrateError } = require("celebrate");
 
 /**
  *
@@ -28,7 +28,19 @@ module.exports = (app, db) => {
   app.use("/api", routes(db));
 
   /** Validation error handling */
-  app.use(errors());
+  app.use((err, req, res, next) => {
+    // If this isn't a Celebrate error, send it to the next error handler
+    if (!isCelebrateError(err)) {
+      return next(err);
+    }
+    const result = {
+      statusCode: 400,
+      error: "Bad Request",
+      message: err.details.get("body").details[0].message
+    };
+
+    return res.status(400).send(result);
+  });
 
   /** HTTP errors handling */
   app.use((error, req, res, next) => {
@@ -37,7 +49,8 @@ module.exports = (app, db) => {
       // Sends response
       res.json({
         status: error.status,
-        error: error.message,
+        error: "HTTP ERROR",
+        message: error.message,
         stack: error.stack
       });
     } else {
