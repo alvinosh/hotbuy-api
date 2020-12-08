@@ -11,7 +11,7 @@ module.exports.register = {
     repeat_password: Joi.ref("password"),
     email: Joi.string().min(6).required().email().label("Email"),
     username: Joi.string().alphanum().min(3).max(30).required(),
-    phone: Joi.number().integer().required().message("Phone number is required")
+    phone: Joi.number().integer().required()
   })
 };
 
@@ -20,8 +20,8 @@ module.exports.register = {
  */
 module.exports.login = {
   [Segments.BODY]: Joi.object().keys({
-    password: Joi.string().required().min(6).label("Password"),
-    email: Joi.string().min(6).required().email().label("Email")
+    password: Joi.string().required().label("Password"),
+    email: Joi.string().required().label("Email")
   })
 };
 

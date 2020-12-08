@@ -13,7 +13,7 @@ module.exports = async (data, db) => {
     const user = await User.findOne({ where: { email: data.email } });
 
     if (!user) {
-      throw new createError(400, "Email not found");
+      throw new createError(400, "Email Doesn't exist");
     }
 
     const validPass = await bcrypt.compare(
